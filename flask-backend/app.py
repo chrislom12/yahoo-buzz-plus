@@ -19,5 +19,5 @@ def git_update():
 
 
 @app.route('/')
-def index():
-    return "Hello World"
+def hello_world():
+    return 'Hello from Flask1!'
