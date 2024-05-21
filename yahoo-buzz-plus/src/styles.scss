@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+
+html body{
+    height: max-content;
+    min-height: 100vh;
+    padding: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: linear-gradient(0deg, rgb(150, 100, 210) 1%, rgb(108, 86, 158) 100%);
+
+    /* background-position: 0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px;
+    background-position: 0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px;
+    background-image: linear-gradient(90deg, #FFFFFF33 0%, #FFFFFF36 100%),radial-gradient(18% 28% at 60% 31%, #40009061 7%, #073AFF00 100%),radial-gradient(18% 28% at 67% 48%, #400090FF 6%, #073AFF00 100%),radial-gradient(49% 39% at 47% 66%, #400090FF 0%, #073AFF00 100%),radial-gradient(42% 53% at 20% 122%, #FFFFFFFF 7%, #073AFF00 100%),radial-gradient(42% 53% at 24% 7%, #6812FFFF 7%, #073AFF00 100%),radial-gradient(18% 28% at 60% 80%, #400090 7%, #073AFF00 100%),radial-gradient(31% 43% at 119% 107%, #FFFFFFFF 24%, #073AFF00 100%),radial-gradient(21% 37% at 51% 58%, #400090 24%, #073AFF00 100%),radial-gradient(35% 56% at 108% 37%, #8A4FFFF5 9%, #073AFF00 100%),radial-gradient(74% 86% at 67% 38%, #400090 24%, #073AFF00 100%),linear-gradient(125deg, #400090FF 1%, #4C00FCFF 100%); */}

@@ -1,0 +1,107 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.card {
+  margin-top: 20px;
+}
+
+/* .extend{
+    
+    max-height: 90%;
+} */
+
+
+.main-card{
+    background-color: white;
+    height: 80%;
+ /*    height: 80vh;
+    max-height: 80vh; */
+    border-radius: 1rem;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add box shadow */
+    padding: 1.5rem 3rem;
+
+}
+
+.card-title {
+  font-size: 3rem;
+  font-weight: 700;
+  font-family: 'EB Garamond', serif;
+  margin-bottom: 2rem;
+}
+
+.restricted{
+    max-width: 80%;
+}
+
+.card-text {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  letter-spacing: 0.02em; /* Adjust letter spacing as needed */
+  line-height: 1.6; /* Adjust line height as needed */
+
+
+}
+
+.btn {
+  font-size: 1.1rem;
+  margin: 1rem;
+  padding: 0.3rem 0.8rem;
+  width: 8rem;
+  font-family: 'Roboto', sans-serif;
+  border-radius: 0.3rem;
+
+}
+
+.btn-green{
+    background-color: rgb(23, 214, 23);
+}
+
+.btn-red{
+    background-color: rgb(233, 59, 59);
+}
+
+.article-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+  }
+  
+  .progress {
+    position: relative;
+  }
+  
+  .circular-progress {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    border: 5px solid rgb(104, 255, 39);
+    margin-top: 0rem;
+
+  }
+  
+  .ratio {
+    position: relative;
+    font-size: 1.3rem;
+    color: rgba(0, 0, 0, 0.8);
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
+  
