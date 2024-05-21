@@ -56,9 +56,8 @@ def recommendation(idx, like, total_similarity_scores):
 
 
 def runRecommendations(feedback):
-    feedback_dict = json.loads(feedback)
     total_similarity_scores = {idx: 0 for idx in range(len(ds))}
-    for rec in feedback_dict.get('recommendations', []):
+    for rec in feedback.get('recommendations', []):
         idx = rec.get('idx')
         like = rec.get('like')
         total_similarity_scores = recommendation(idx, like, total_similarity_scores)
