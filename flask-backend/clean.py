@@ -14,6 +14,7 @@ ds = ds.sample(n=1000, random_state=42)
 print(ds.shape)
 ds = ds.drop_duplicates(subset=None, keep='first', inplace=False)
 
+
 print(ds.shape)
 
 
@@ -54,15 +55,23 @@ def clean_date(date_time_str):
     return date_part
 
 def add_breaks(text):
-    text.replace("\r\n", "<br>")
+    text = text.replace("\r\n", "<br>")
+    return text
+
 
 
 ds['cleaned_desc'] = ds['text'].apply(func = make_lower_case)
+
+
 ds['cleaned_desc'] = ds.cleaned_desc.apply(func = remove_stop_words)
 ds['cleaned_desc'] = ds.cleaned_desc.apply(func=remove_punctuation)
 ds['cleaned_desc'] = ds.cleaned_desc.apply(func=remove_html)
 ds['date'] = ds['date'].apply(clean_date)
+
+
 ds['text'] = ds['text'].apply(add_breaks)
+
+
 
 ds.insert(0,'id',range(0,ds.shape[0]))
 print(ds.shape)

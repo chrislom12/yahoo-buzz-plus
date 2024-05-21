@@ -48,7 +48,16 @@ def hello_world():
 @app.route('/api/getArticles/')
 def getArticles():
     random_articles = ds.sample(n=10).to_dict(orient='records')
+    # Convert the dictionary to a JSON string
+    json_data = json.dumps(random_articles, indent=4)
+
+    print(json_data)
     return jsonify(random_articles)
+
+@app.route('/api/test/')
+def test():
+    test = '''{"name": "here"}'''
+    return jsonify(test)
 
 @app.route('/api/recommend/', methods=['POST'])
 def getRecommendations():
