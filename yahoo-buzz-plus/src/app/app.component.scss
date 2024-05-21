@@ -18,14 +18,22 @@ body {
 
 
 .main-card{
-    background-color: white;
-    height: 80%;
+    background-color: rgb(255, 255, 255);
+    height: 85vh;
  /*    height: 80vh;
     max-height: 80vh; */
     border-radius: 1rem;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add box shadow */
     padding: 1.5rem 3rem;
+    display: flex;
+    flex-direction: column;
 
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .card-title {
@@ -39,6 +47,26 @@ body {
     max-width: 80%;
 }
 
+.card-text-container {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-bottom: 20px; /* Optional: Adjust spacing around card-text */
+}
+
+.card-text-container::-webkit-scrollbar {
+  width: 12px; /* Adjust the width of the scrollbar */
+}
+
+.card-text-container::-webkit-scrollbar-thumb {
+  background-color: #007bff; /* Color of the scrollbar handle */
+  border-radius: 10px; /* Rounded corners */
+  border: 3px solid #f8f9fa; /* Adds space around the handle */
+}
+
+.card-text-container::-webkit-scrollbar-track {
+  background-color: #f8f8fa; /* Color of the scrollbar track */
+}
+
 .card-text {
   font-size: 1.2rem;
   margin-bottom: 20px;
@@ -47,6 +75,8 @@ body {
 
 
 }
+
+
 
 .btn {
   font-size: 1.1rem;
@@ -77,6 +107,17 @@ body {
   .title {
     font-size: 1.5rem;
   }
+
+  .info-pills {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px; /* Adjust spacing as needed */
+  }
+
+  .pill{
+    margin-right: 1rem;
+    margin-top: 0.5rem;
+  }
   
   .progress {
     position: relative;
@@ -105,3 +146,49 @@ body {
     font-weight: bold;
 }
   
+
+@media (max-width: 900px) 
+ {
+    .card-title {
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: 'EB Garamond', serif;
+  margin-bottom: 2rem;
+}
+
+.restricted{
+    max-width: 80%;
+}
+
+.card-text-container {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-bottom: 20px; /* Optional: Adjust spacing around card-text */
+}
+
+.card-text {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  letter-spacing: 0.02em; /* Adjust letter spacing as needed */
+  line-height: 1.6; /* Adjust line height as needed */
+
+
+
+}
+
+.circular-progress {
+  width: 45px;
+  height: 45px;
+
+
+}
+
+.ratio {
+  position: relative;
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.8);
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+}
+ }

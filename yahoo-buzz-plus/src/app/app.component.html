@@ -3,17 +3,29 @@
 
 <div class="container mt-5 extend">
   <div class="card extend">
-    <div class="card-body main-card">
+    <div class="card-body main-card" [@fadeInOut]>
       <div class="article-header">
         <div class="card-title restricted">{{ article.title }}</div>
         <div class="circular-progress">
-          <p class="ratio">1/10</p>
+          <p class="ratio">{{articleProgress}}/10</p>
         </div>
       </div>
-      <p class="card-text">{{ article.content }}</p>
+      <div class="info-pills mb-3">
+        <ul class="nav nav-pills">
+          <li class="nav-item pill">
+            <span class="nav-link active">Published: {{article.date}}</span>
+          </li>
+          <li class="nav-item pill">
+            <a class="nav-link active" href="{{article.link}}" target="_blank">Link to Original Article</a>
+          </li>
+        </ul>
+      </div>
+      <div class="card-text-container">
+        <p class="card-text">{{ article.content }}</p>
+      </div>
       <div class="d-flex justify-content-center"> <!-- Center the buttons -->
-        <button class="btn btn-success mr-2" (click)="likeArticle()">Like</button>
-        <button class="btn btn-danger" (click)="dislikeArticle()">Dislike</button>
+        <button class="btn btn-success mr-2" (click)="likeArticle()">Buzz Up</button>
+        <button class="btn btn-danger" (click)="dislikeArticle()">Buzz Down</button>
       </div>
     </div>
   </div>
