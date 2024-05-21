@@ -5,11 +5,28 @@ import git
 from dotenv import load_dotenv
 import os
 
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import linear_kernel
+import json
+
+import recommendor
+
+
 load_dotenv()
 
 
 app = Flask(__name__)
 CORS(app)
+
+ds = pd.read_csv('cleaned_data.csv')
+
+tf = TfidfVectorizer(analyzer='word',stop_words='english',max_df=0.8,min_df=0.0,use_idf=True,ngram_range=(1,3))
+tfidf_matrix = tf.fit_transform(ds['cleaned_desc'])
+
+
+
+cosine_similarities = linear_kernel(tfidf_matrix, tfidf_matrix)
 
 # Route for the GitHub webhook
 
@@ -26,11 +43,18 @@ def git_update():
 
 @app.route('/')
 def hello_world():
-    return 'Hello from Flask Chris!'
+    return 'Welcome to my API'
 
-@app.route('/api/getarticles/')
+@app.route('/api/getArticles/')
 def getArticles():
-    return 'articles2'
+    random_articles = ds.sample(n=10).to_dict(orient='records')
+    return jsonify(random_articles)
+
+@app.route('/api/recommend/', methods=['POST'])
+def getRecommendations():
+    feedback = request.json
+    results = recommendor.runRecommendations(feedback)
+    return results
 
 # main driver function
 if __name__ == '__main__':
