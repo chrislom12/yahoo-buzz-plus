@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticleService } from './article.service';
+import { RecommendationService } from './recommendor.service';
+
 
 @Component({
   selector: 'app-root',
@@ -32,7 +34,13 @@ export class AppComponent implements OnInit {
 
   allArticles: any;
 
-  constructor(private articleService: ArticleService) {}
+  preferences: any[] = []; // Initialize preferences as an empty array
+
+  recommendations: any;
+
+  view = 1;
+
+  constructor(private articleService: ArticleService, private recommendationService: RecommendationService) {}
 
   ngOnInit(): void {
     this.articleService.getArticles().subscribe(
@@ -58,18 +66,54 @@ export class AppComponent implements OnInit {
 
   likeArticle() {
     // Logic to handle liking the article
+    const feedback = {"idx": this.article.id, "like": true};
+    this.preferences.push(feedback);
+
+    this.checkSend()
     this.articleIndex++;
     this.articleProgress++;
     this.article = this.allArticles[this.articleIndex];
-    console.log('Article liked!');
+    console.log(this.preferences);
   }
 
   dislikeArticle() {
     // Logic to handle disliking the article
+    const feedback = {"idx": this.article.id, "like": false};
+
+    this.preferences.push(feedback);
+
     this.articleIndex++;
     this.articleProgress++;
 
     this.article = this.allArticles[this.articleIndex];
-    console.log('Article disliked!');
+    console.log(this.preferences);
   }
+
+  checkSend(){
+    console.log("checking send")
+    console.log(this.articleProgress)
+    if (this.articleProgress>9){
+      this.sendFeedback();
+    }
+  }
+
+  sendFeedback() {
+    const feedback = {
+      "recommendations": this.preferences
+    };
+
+    console.log("about to send")
+    this.recommendationService.getRecommendations(feedback).subscribe(
+      (results) => {
+        // Handle the results returned from the Flask API
+        this.recommendations = results;
+        this.view = 2;
+        console.log(results);
+      },
+      (error) => {
+        console.error('Error fetching recommendations:', error);
+      }
+    );
+  }
+
 }

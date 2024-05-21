@@ -1,7 +1,9 @@
 
 <!-- <div>{{ articles }}</div> -->
 
-<div class="container mt-5 extend">
+
+
+<div *ngIf="view === 1" class="container mt-5 extend">
   <div class="card extend">
     <div class="card-body main-card">
       <div class="article-header">
@@ -30,4 +32,18 @@
     </div>
   </div>
 </div>
+
+<div *ngIf="view === 2" class="container mt-5 extend">
+  <div class="row d-flex flex-wrap">
+    <div class="col-md-6 d-flex align-items-stretch" *ngFor="let article of recommendations">
+      <div class="card mb-4 shadow-sm w-100">
+        <div class="card-body headline-card">
+          <h5 class="card-title">{{ article.title }}</h5>
+          <a [href]="article.link" target="_blank" class="btn btn-primary">Read More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <router-outlet></router-outlet>
