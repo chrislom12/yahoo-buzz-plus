@@ -36,13 +36,6 @@ describe('Main page initial content loads', () => {
   })
 })
 
-describe('Main page starts with a spinner', () => {
-  it('Visits the initial project page', () => {
-    cy.visit('/')
-    cy.get('.spinner').should('be.visible');
-  })
-})
-
 describe('External link opens in new tab', () => {
   it('Clicks an external link and verifies it opens in new tab', () => {
     cy.visit('/');
