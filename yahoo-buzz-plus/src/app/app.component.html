@@ -1,6 +1,8 @@
 
 <!-- <div>{{ articles }}</div> -->
-
+<div *ngIf="loading" class="loading-overlay">
+  <div class="spinner"></div>
+</div>
 
 
 <div *ngIf="view === 1" class="container mt-5 extend">

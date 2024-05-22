@@ -40,6 +40,8 @@ export class AppComponent implements OnInit {
 
   view = 1;
 
+  loading=true;
+
   constructor(private articleService: ArticleService, private recommendationService: RecommendationService) {}
 
   ngOnInit(): void {
@@ -49,6 +51,7 @@ export class AppComponent implements OnInit {
         if (this.allArticles.length > 0) {
           console.log(this.allArticles)
           this.article = this.allArticles[0];
+          this.loading=false;
           console.log("article incoming")
           console.log(this.article)
         }
@@ -103,11 +106,13 @@ export class AppComponent implements OnInit {
     };
 
     console.log("about to send")
+    this.loading=true;
     this.recommendationService.getRecommendations(feedback).subscribe(
       (results) => {
         // Handle the results returned from the Flask API
         this.recommendations = results;
         this.view = 2;
+        this.loading=false;
         console.log(results);
       },
       (error) => {
