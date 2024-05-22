@@ -40,7 +40,7 @@ jobs:
       - name: Start python backend
         working-directory: flask-backend
         run: |
-          python app.y
+          python app.py
 
       - name: Run tests
         run: npm run test:headless
