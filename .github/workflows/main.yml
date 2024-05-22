@@ -37,7 +37,7 @@ jobs:
           folder: yahoo-buzz-plus/dist/
           branch: prod  
           token: ${{ secrets.GH_TOKEN }}
-  test backend:
+  test-backend:
 
     runs-on: ubuntu-latest
 
