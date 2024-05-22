@@ -40,6 +40,10 @@ jobs:
         run: npm install
         working-directory: yahoo-buzz-plus
 
+      - name: Run frontend
+        run: ng serve &
+        working-directory: yahoo-buzz-plus
+
       - name: Run tests
         working-directory: yahoo-buzz-plus
         run: npm run test:headless
