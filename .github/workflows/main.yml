@@ -43,8 +43,8 @@ jobs:
           python app.py
 
       - name: Run tests
-        run: npm run test:headless
         working-directory: yahoo-buzz-plus
+        run: npm run test:headless
 
       - name: Build Angular app to prod
         if: github.ref == 'refs/heads/main'
