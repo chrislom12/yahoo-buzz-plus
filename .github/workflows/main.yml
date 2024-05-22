@@ -43,7 +43,9 @@ jobs:
         working-directory: yahoo-buzz-plus
         run: |
           cd ../flask-backend/
-          python app.py
+          python app.py &&
+          sleep 5 &&
+          curl http://localhost:5000 -I &&
           cd ../yahoo-buzz-plus/
           npm run test:headless
 
