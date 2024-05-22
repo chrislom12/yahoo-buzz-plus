@@ -8,12 +8,11 @@ import { environment } from '../environments/environment';
   providedIn: 'root',
 })
 export class ArticleService {
-  private baseUrl = environment.baseUrl;
-  private apiUrl = this.baseUrl + '/api/getarticles/'; // Adjust the URL if needed
+  baseUrl = environment.baseUrl;
+  apiUrl = this.baseUrl + '/api/getArticles/'; 
 
   constructor(private http: HttpClient) {}
 
-  getArticles(): Observable<string> {
-    return this.http.get(this.apiUrl, { responseType: 'text' });
-  }
+  getArticles(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);  }
 }

@@ -1,19 +1,20 @@
-from flask import Flask, request, render_template, jsonify
-from flask.wrappers import Response
+import json
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 import git  
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
+import recommendor
+from shared import cosine_similarities, ds  # Import from shared.py
 
+
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
 
 # Route for the GitHub webhook
-
-
 @app.route('/git_update', methods=['POST'])
 def git_update():
     repo = git.Repo('./yahoo-buzz-plus')
@@ -23,17 +24,24 @@ def git_update():
     origin.pull()
     return '', 200
 
-
 @app.route('/')
 def hello_world():
-    return 'Hello from Flask Chris!'
+    return 'Welcome to my API'
 
-@app.route('/api/getarticles/')
+@app.route('/api/getArticles/')
 def getArticles():
-    return 'articles2'
+    random_articles = ds.sample(n=10).to_dict(orient='records')
+    return jsonify(random_articles)
+
+@app.route('/api/recommend/', methods=['POST'])
+def getRecommendations():
+    feedback = request.json
+    results = recommendor.runRecommendations(feedback)
+    return jsonify(json.loads(results))
 
 # main driver function
 if __name__ == '__main__':
     dev = os.getenv('DEVELOPMENT')
-    if(dev == "True"):
-        app.run()
+    if dev == "True" or dev is None:
+        port = int(os.environ.get("PORT", 5000))
+        app.run(port=port)
