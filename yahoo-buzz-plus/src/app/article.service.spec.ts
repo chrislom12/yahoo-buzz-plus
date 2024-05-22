@@ -1,7 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ArticleService } from './article.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClientModule, HttpErrorResponse } from '@angular/common/http';
 
 describe('ArticleService', () => {
   let service: ArticleService;
@@ -51,3 +51,44 @@ describe('ArticleService', () => {
     req.error(new ErrorEvent('Unknown Error'), { status: 0 });
   });
 });
+
+describe('ArticleService Integration Tests', () => {
+  let service: ArticleService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientModule],
+      providers: [ArticleService]
+    });
+    service = TestBed.inject(ArticleService);
+  });
+
+  it('should fetch articles successfully from the real API', (done) => {
+    service.getArticles().subscribe({
+      next: (articles) => {
+        expect(articles).toBeDefined();
+        expect(articles.length).toBeGreaterThan(0);
+        done();
+      },
+      error: (error) => {
+        fail('Expected successful API call, but got error: ' + error.message);
+        done();
+      }
+    });
+  });
+
+  it('should handle error when fetching articles from the real API', (done) => {
+    service.apiUrl = 'http://invalid-url/api/getArticles/'; 
+    service.getArticles().subscribe({
+      next: () => {
+        fail('Expected an error, but got a successful response');
+        done();
+      },
+      error: (error) => {
+        expect(error).toBeTruthy();
+        done();
+      }
+    });
+  });
+});
+
