@@ -12,6 +12,7 @@ def aggregateRecommendation(total_similarity_scores):
         article_details = {
             "title": ds['title'].iloc[article_idx],
             "link": ds['link'].iloc[article_idx],
+            "date": ds['date'].iloc[article_idx],
             "text": ds['text'].iloc[article_idx],
             "total_score": similarity_score
         }
