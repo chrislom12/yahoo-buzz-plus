@@ -42,10 +42,10 @@ jobs:
       - name: Run tests
         working-directory: yahoo-buzz-plus
         run: |
-        cd ../flask-backend/
-        python app.py
-        cd ../yahoo-buzz-plus/
-        npm run test:headless
+          cd ../flask-backend/
+          python app.py
+          cd ../yahoo-buzz-plus/
+          npm run test:headless
 
       - name: Build Angular app to prod
         if: github.ref == 'refs/heads/main'
