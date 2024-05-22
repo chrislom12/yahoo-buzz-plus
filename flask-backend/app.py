@@ -50,7 +50,7 @@ if __name__ == '__main__':
     dev = os.getenv('DEVELOPMENT')
     prod = os.getenv('PRODUCTION')
     print("running")
-    if dev == "True" or prod == "False":
+    if dev == "True" or dev is None:
         print("dev is true")
         port = int(os.environ.get("PORT", 5000))
         print("port")
