@@ -1,12 +1,16 @@
-name: Angular Build and Deploy
+name: App Building, Testing and Deployment
 
 on:
   push:
     branches:
-      - '**'  # Trigger on push to any branch
+      - '**'
+  pull_request: 
+    branches:
+      - '**'
+  
 
 jobs:
-  build:
+  test-and-deploy-frontend:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
