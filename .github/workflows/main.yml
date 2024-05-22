@@ -57,7 +57,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
       
-    - name: Run backend tests
-      working-directory: flask-backend
-      run: |
-        python -m unittest discover -s tests
+    - name: Run tests
+        working-directory: flask-backend
+        run: |
+          python -m pytest tests
