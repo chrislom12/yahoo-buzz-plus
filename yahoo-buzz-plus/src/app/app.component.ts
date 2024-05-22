@@ -85,6 +85,7 @@ export class AppComponent implements OnInit {
 
     this.preferences.push(feedback);
 
+    this.checkSend();
     this.articleIndex++;
     this.articleProgress++;
 
@@ -119,6 +120,18 @@ export class AppComponent implements OnInit {
         console.error('Error fetching recommendations:', error);
       }
     );
+  }
+
+  readMore(index: number) {
+    // Do something with the index, such as logging it or performing an action based on it
+    this.article = this.recommendations[index];
+    this.view=3;
+    console.log('Read More button clicked for article index:', index);
+  }
+
+  closeView(){
+    console.log("close")
+    this.view = 2;
   }
 
 }
