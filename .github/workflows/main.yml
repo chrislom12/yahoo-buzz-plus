@@ -16,15 +16,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
-      - name: Install dependencies
-        run: npm install
-        working-directory: yahoo-buzz-plus 
-
       - uses: actions/checkout@v4
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -41,6 +32,17 @@ jobs:
         working-directory: flask-backend
         run: |
           python app.py
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: yahoo-buzz-plus 
+
+      
 
       - name: Run tests
         working-directory: yahoo-buzz-plus
