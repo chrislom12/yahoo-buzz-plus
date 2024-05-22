@@ -41,7 +41,7 @@ jobs:
         working-directory: yahoo-buzz-plus
 
       - name: Run frontend
-        run: ng serve &
+        run: npm start &
         working-directory: yahoo-buzz-plus
 
       - name: Run tests
