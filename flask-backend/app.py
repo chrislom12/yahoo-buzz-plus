@@ -50,6 +50,12 @@ if __name__ == '__main__':
     dev = os.getenv('DEVELOPMENT')
     print("running")
     if dev == "True":
+        print("dev is true")
         port = int(os.environ.get("PORT", 5000))
+        print("port")
         app.run(port=port)
-        print(f"App is running on port {port}")
+        with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
+            print(f'running on {port}', file=fh)
+            print(f"App is running on port {port}")
+    else:
+        print("dev not true")
