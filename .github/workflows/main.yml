@@ -23,6 +23,7 @@ jobs:
 
       - name: Run tests
         run: npm run test:headless
+        working-directory: yahoo-buzz-plus
 
       - name: Build Angular app to prod
         working-directory: yahoo-buzz-plus
