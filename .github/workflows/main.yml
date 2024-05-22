@@ -45,12 +45,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - uses: actions/checkout@v4
     - name: Set up Python
-      working-directory: flask-backend
-        # This is the version of the action for setting up Python, not the Python version.
       uses: actions/setup-python@v5
       with:
-        # Semantic version range syntax or exact version of a Python version
         python-version: '3.8'
 
     - name: Install python dependencies
