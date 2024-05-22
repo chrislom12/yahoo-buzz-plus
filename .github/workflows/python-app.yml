@@ -1,6 +1,8 @@
 name: Python Flask App CI
 
-on: [push, pull_request]
+on:
+  branches:
+      - '**'
 
 jobs:
   build:
