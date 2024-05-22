@@ -8,8 +8,8 @@ import { environment } from '../environments/environment';
   providedIn: 'root',
 })
 export class ArticleService {
-  private baseUrl = environment.baseUrl;
-  private apiUrl = this.baseUrl + '/api/getArticles/'; 
+  baseUrl = environment.baseUrl;
+  apiUrl = this.baseUrl + '/api/getArticles/'; 
 
   constructor(private http: HttpClient) {}
 

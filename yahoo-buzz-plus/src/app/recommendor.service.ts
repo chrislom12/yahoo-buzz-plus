@@ -8,8 +8,8 @@ import { environment } from '../environments/environment';
   providedIn: 'root'
 })
 export class RecommendationService {
-    private baseUrl = environment.baseUrl;
-    private apiUrl = this.baseUrl + '/api/recommend/';
+    baseUrl = environment.baseUrl;
+    apiUrl = this.baseUrl + '/api/recommend/';
 
   constructor(private http: HttpClient) {}
 

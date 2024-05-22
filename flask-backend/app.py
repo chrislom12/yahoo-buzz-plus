@@ -1,3 +1,4 @@
+import json
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import git  
@@ -36,10 +37,11 @@ def getArticles():
 def getRecommendations():
     feedback = request.json
     results = recommendor.runRecommendations(feedback)
-    return results
+    return jsonify(json.loads(results))
 
 # main driver function
 if __name__ == '__main__':
     dev = os.getenv('DEVELOPMENT')
-    if dev == "True":
-        app.run()
+    if dev == "True" or dev is None:
+        port = int(os.environ.get("PORT", 5000))
+        app.run(port=port)
