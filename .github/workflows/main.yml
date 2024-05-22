@@ -28,15 +28,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Start Python backend
-      - name: Start Python backend
-        working-directory: flask-backend
-        run: python app.py &
-
-      # Wait for backend to start (adjust sleep duration as needed)
-      - name: Wait for backend to start
-        run: sleep 10s
-
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
@@ -49,10 +40,12 @@ jobs:
       
 
       - name: Run tests
-        working-directory: flask-backend
-        run: python app.py &
         working-directory: yahoo-buzz-plus
-        run: npm run test:headless
+        run: |
+        cd ../flask-backend/
+        python app.py
+        cd ../yahoo-buzz-plus/
+        npm run test:headless
 
       - name: Build Angular app to prod
         if: github.ref == 'refs/heads/main'
