@@ -3,7 +3,7 @@ name: Angular Build and Deploy
 on:
   push:
     branches:
-      - main
+      - '**'  # Trigger on push to any branch
 
 jobs:
   build:
@@ -17,11 +17,18 @@ jobs:
         with:
           node-version: 20
 
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm run test:headless
+
       - name: Build Angular app to prod
         working-directory: yahoo-buzz-plus
-        run: npm install && npm run build:prod
+        run: npm run build:prod
 
       - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/main'  # Deploy only if push is to main branch
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: yahoo-buzz-plus/dist/
