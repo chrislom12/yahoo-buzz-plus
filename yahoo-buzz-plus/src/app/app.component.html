@@ -45,6 +45,9 @@
 </div>
 
 <div *ngIf="view === 2" class="container mt-5 extend">
+  <div class="container mt-5 extend">
+    <h1 class="big-title">Recommended Articles</h1>
+  </div>
   <div class="row d-flex flex-wrap">
     <div class="col-md-6 d-flex align-items-stretch" *ngFor="let article of recommendations; let i = index">
       <div class="card mb-4 shadow-sm w-100">
