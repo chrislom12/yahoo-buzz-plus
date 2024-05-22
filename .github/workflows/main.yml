@@ -19,6 +19,7 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: yahoo-buzz-plus 
 
       - name: Run tests
         run: npm run test:headless
