@@ -7,6 +7,10 @@ import json
 from recommendor import aggregateRecommendation, recommendation, runRecommendations
 from shared import ds, cosine_similarities
 
+# ======================
+# UNIT TESTS
+# ======================
+
 @pytest.fixture
 def client():
     # Set up the Flask test client
@@ -75,7 +79,7 @@ def test_recommendation_like(mock_cosine_similarities):
     like = True
     total_similarity_scores = {i: 0 for i in range(len(ds))}
     updated_scores = recommendation(idx, like, total_similarity_scores)
-    assert updated_scores[idx] == 0  # Ensure the base article is not modified
+    assert updated_scores[idx] == 0 
     assert all(score >= 0 for score in updated_scores.values())
 
 def test_recommendation_dislike(mock_cosine_similarities):
@@ -93,3 +97,23 @@ def test_run_recommendations(mocker, mock_ds, mock_cosine_similarities):
     assert json.loads(result) == [{'title': 'Test'}]
     mock_aggregate.assert_called_once()
 
+
+# ======================
+# INTEGRATION TESTS
+# ======================
+
+def test_get_root(client):
+    response = client.get('/')
+    assert response.status_code == 200
+    assert response.data.decode('utf-8') == 'Welcome to my API'
+
+def test_get_articles(client):
+    response = client.get('/api/getArticles/')
+    assert response.status_code == 200
+    assert response.content_type == 'application/json'
+
+def test_post_recommendations(client):
+    feedback = {'recommendations': [{'idx': 1, 'like': True}]}
+    response = client.post('/api/recommend/', json=feedback)
+    assert response.status_code == 200
+    assert response.content_type == 'application/json'
