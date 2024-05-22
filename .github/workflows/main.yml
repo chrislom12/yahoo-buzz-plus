@@ -29,7 +29,7 @@ jobs:
 
       - name: Start Python backend
         working-directory: flask-backend
-        run: python app.py | tee output.log
+        run: python app.py | tee output.log &
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
