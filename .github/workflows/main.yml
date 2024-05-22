@@ -49,7 +49,7 @@ jobs:
       
 
       - name: Run tests
-        sworking-directory: flask-backend
+        working-directory: flask-backend
         run: python app.py &
         working-directory: yahoo-buzz-plus
         run: npm run test:headless
