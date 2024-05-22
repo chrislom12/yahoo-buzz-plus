@@ -32,11 +32,6 @@ def getArticles():
     random_articles = ds.sample(n=10).to_dict(orient='records')
     return jsonify(random_articles)
 
-@app.route('/api/test/')
-def test():
-    test = '''{"name": "here"}'''
-    return jsonify(test)
-
 @app.route('/api/recommend/', methods=['POST'])
 def getRecommendations():
     feedback = request.json
