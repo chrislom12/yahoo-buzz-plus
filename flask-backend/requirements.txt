@@ -1,0 +1,12 @@
+Flask
+Flask_Cors
+GitPython
+GitPython
+matplotlib
+nltk
+numpy
+numpy
+pandas
+python-dotenv
+scikit_learn
+pytest
