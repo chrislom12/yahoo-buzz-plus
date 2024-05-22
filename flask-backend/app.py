@@ -1,3 +1,4 @@
+import json
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import git  
@@ -32,14 +33,23 @@ def getArticles():
     random_articles = ds.sample(n=10).to_dict(orient='records')
     return jsonify(random_articles)
 
+""" @app.route('/api/recommend/', methods=['POST'])
+def getRecommendations():
+    feedback = request.json
+    results = recommendor.runRecommendations(feedback)
+    return results """
+
 @app.route('/api/recommend/', methods=['POST'])
 def getRecommendations():
     feedback = request.json
     results = recommendor.runRecommendations(feedback)
-    return results
+    return jsonify(json.loads(results))
 
 # main driver function
 if __name__ == '__main__':
     dev = os.getenv('DEVELOPMENT')
+    print("running")
     if dev == "True":
-        app.run()
+        port = int(os.environ.get("PORT", 5000))
+        app.run(port=port)
+        print(f"App is running on port {port}")
