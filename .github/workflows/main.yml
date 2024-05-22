@@ -26,6 +26,7 @@ jobs:
         working-directory: yahoo-buzz-plus
 
       - name: Build Angular app to prod
+        if: github.ref == 'refs/heads/main'
         working-directory: yahoo-buzz-plus
         run: npm run build:prod
 
