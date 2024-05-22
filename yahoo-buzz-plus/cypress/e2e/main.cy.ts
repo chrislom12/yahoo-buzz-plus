@@ -69,3 +69,21 @@ describe('Click Buzz up and Buzz down buttons multiple times', () => {
   });
 });
 
+describe('Use help function', () => {
+  it('Clicking the help icon works', () => {
+    cy.visit('/');
+
+    // Verify the link has the correct target and href attributes
+    cy.get('[data-cy="help-link"]')
+      .should('have.attr', 'target', '_blank')
+      .and('have.attr', 'href')
+      .then((href) => {
+        expect(href).to.include('drive.google.com/file');
+        
+        // Remove the target attribute to force the link to open in the same tab
+        cy.get('[data-cy="help-link"]').invoke('removeAttr', 'target').click();
+
+      });
+  });
+});
+

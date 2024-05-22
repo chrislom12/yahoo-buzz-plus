@@ -3,7 +3,7 @@
 <div class="container-logo">
   <div class="logo-container">
     <img src="../assets/buzz logo@2x.png" alt="Logo" class="logo">
-    <a href="https://drive.google.com/file/d/1iPdO7YTw_4LHrCMyyo1KTWjQfesTmeUG/view?usp=sharing" target= "_blank" class="help-button"><img src="../assets/circle-question-solid.svg" class="close-icon custom-button">
+    <a data-cy="help-link" href="https://drive.google.com/file/d/1iPdO7YTw_4LHrCMyyo1KTWjQfesTmeUG/view?usp=sharing" target= "_blank" class="help-button"><img src="../assets/circle-question-solid.svg" class="close-icon custom-button">
     </a>
   </div>
 
@@ -44,14 +44,11 @@
   </div>
 </div>
 
-<<<<<<< HEAD
-<div *ngIf="view === 2" class="container mt-5 extend">
+  
+<div data-cy="view 2" *ngIf="view === 2" class="container mt-5 extend">
   <div class="container mt-5 extend">
     <h1 class="big-title">Recommended Articles</h1>
   </div>
-=======
-<div data-cy="view 2" *ngIf="view === 2" class="container mt-5 extend">
->>>>>>> 29dfb2d3c8020763657c1f4aafcf05b897aa8311
   <div class="row d-flex flex-wrap">
     <div class="col-md-6 d-flex align-items-stretch" *ngFor="let article of recommendations; let i = index">
       <div class="card mb-4 shadow-sm w-100">
