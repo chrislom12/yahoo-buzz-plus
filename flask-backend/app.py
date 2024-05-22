@@ -33,12 +33,6 @@ def getArticles():
     random_articles = ds.sample(n=10).to_dict(orient='records')
     return jsonify(random_articles)
 
-""" @app.route('/api/recommend/', methods=['POST'])
-def getRecommendations():
-    feedback = request.json
-    results = recommendor.runRecommendations(feedback)
-    return results """
-
 @app.route('/api/recommend/', methods=['POST'])
 def getRecommendations():
     feedback = request.json
@@ -48,15 +42,6 @@ def getRecommendations():
 # main driver function
 if __name__ == '__main__':
     dev = os.getenv('DEVELOPMENT')
-    prod = os.getenv('PRODUCTION')
-    print("running")
     if dev == "True" or dev is None:
-        print("dev is true")
         port = int(os.environ.get("PORT", 5000))
-        print("port")
         app.run(port=port)
-        with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
-            print(f'running on {port}', file=fh)
-            print(f"App is running on port {port}")
-    else:
-        print("dev not true")
