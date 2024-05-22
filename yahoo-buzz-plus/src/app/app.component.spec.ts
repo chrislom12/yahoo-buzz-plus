@@ -11,11 +11,11 @@ describe('AppComponent', () => {
 
   beforeEach(() => {
     articleServiceStub = {
-      getArticles: () => of([])  // Provide a mock implementation
+      getArticles: () => of([])
     };
 
     recommendationServiceStub = {
-      getRecommendations: () => of([])  // Provide a mock implementation
+      getRecommendations: () => of([])  
     };
 
     TestBed.configureTestingModule({

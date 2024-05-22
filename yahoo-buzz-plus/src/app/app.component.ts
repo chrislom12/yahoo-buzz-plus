@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
 
   allArticles: any;
 
-  preferences: any[] = []; // Initialize preferences as an empty array
+  preferences: any[] = []; 
 
   recommendations: any;
 
@@ -61,14 +61,13 @@ export class AppComponent implements OnInit {
   }
 
   progressRatio(): string {
-    const currentArticle = 1; // Assume we are on the first article
-    const totalArticles = 10; // Total number of articles
+    const currentArticle = 1; 
+    const totalArticles = 10; 
     const ratio = currentArticle / totalArticles;
     return `${ratio * 100}%`;
   }
 
   likeArticle() {
-    // Logic to handle liking the article
     const feedback = {"idx": this.article.id, "like": true};
     this.preferences.push(feedback);
 
@@ -80,7 +79,6 @@ export class AppComponent implements OnInit {
   }
 
   dislikeArticle() {
-    // Logic to handle disliking the article
     const feedback = {"idx": this.article.id, "like": false};
 
     this.preferences.push(feedback);
@@ -123,7 +121,6 @@ export class AppComponent implements OnInit {
   }
 
   readMore(index: number) {
-    // Do something with the index, such as logging it or performing an action based on it
     this.article = this.recommendations[index];
     this.view=3;
     console.log('Read More button clicked for article index:', index);

@@ -2,6 +2,41 @@
 @import url("https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
 
+
+.container-logo {
+  position: relative; 
+  height: auto; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+}
+
+.logo-container {
+  position: absolute; 
+  top: 0; 
+}
+
+/* here
+here */
+.logo {
+  width: 250px; 
+  height: auto; 
+  margin-right: 10px; 
+  border-radius:10px;
+}
+
+.help-button {
+  width: 20px; 
+  height: 20px; 
+  font-size: 12px; 
+  padding: 5px; 
+  border: none; 
+  background-color: transparent; 
+  color: #000; 
+  cursor: pointer; 
+}
+
+
 .card {
   margin-top: 20px;
 }
@@ -17,7 +52,7 @@
   /*    height: 80vh;
     max-height: 80vh; */
   border-radius: 1rem;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Add box shadow */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); 
   padding: 1.5rem 3rem;
   display: flex;
   flex-direction: column;
@@ -33,7 +68,7 @@
   background-color: white;
   padding: 2rem;
   border-radius: 1rem;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Add box shadow */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); 
 }
 
 .card-title {
@@ -62,29 +97,29 @@
 .card-text-container {
   flex-grow: 1;
   overflow-y: auto;
-  margin-bottom: 20px; /* Optional: Adjust spacing around card-text */
+  margin-bottom: 20px; 
   font-family: "Lato", sans-serif;
 }
 
 .card-text-container::-webkit-scrollbar {
-  width: 12px; /* Adjust the width of the scrollbar */
+  width: 12px; 
 }
 
 .card-text-container::-webkit-scrollbar-thumb {
-  background-color: #400090; /* Color of the scrollbar handle */
-  border-radius: 10px; /* Rounded corners */
-  border: 3px solid #f8f9fa; /* Adds space around the handle */
+  background-color: #400090; 
+  border-radius: 10px; 
+  border: 3px solid #f8f9fa; 
 }
 
 .card-text-container::-webkit-scrollbar-track {
-  background-color: #f8f8fa; /* Color of the scrollbar track */
+  background-color: #f8f8fa; 
 }
 
 .card-text {
   font-size: 1rem;
   margin-bottom: 20px;
-  letter-spacing: 0.02em; /* Adjust letter spacing as needed */
-  line-height: 1.6; /* Adjust line height as needed */
+  letter-spacing: 0.02em; 
+  line-height: 1.6; 
 }
 
 .btn {
@@ -119,7 +154,7 @@
 .info-pills {
   display: flex;
   justify-content: flex-start;
-  margin-bottom: 20px; /* Adjust spacing as needed */
+  margin-bottom: 20px; 
 }
 
 .pill {
@@ -177,14 +212,14 @@
   .card-text-container {
     flex-grow: 1;
     overflow-y: auto;
-    margin-bottom: 20px; /* Optional: Adjust spacing around card-text */
+    margin-bottom: 20px; 
   }
 
   .card-text {
     font-size: 1rem;
     margin-bottom: 20px;
-    letter-spacing: 0.02em; /* Adjust letter spacing as needed */
-    line-height: 1.6; /* Adjust line height as needed */
+    letter-spacing: 0.02em; 
+    line-height: 1.6; 
   }
 
   .circular-progress {
@@ -202,7 +237,7 @@
   }
 }
 
-/* CSS for the loading overlay */
+
 .loading-overlay {
   position: fixed;
   top: 0;
@@ -214,21 +249,21 @@
     255,
     255,
     0.8
-  ); /* Semi-transparent white background */
+  ); 
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 100;
 }
 
-/* CSS for the spinner */
+
 .spinner {
-  border: 5px solid rgba(82, 12, 120, 0.3); /* Semi-transparent border */
-  border-top: 5px solid #642ca9; /* Blue border on top */
+  border: 5px solid rgba(82, 12, 120, 0.3); 
+  border-top: 5px solid #642ca9; 
   border-radius: 50%;
   width: 50px;
   height: 50px;
-  animation: spin 1s linear infinite; /* Spin animation */
+  animation: spin 1s linear infinite; 
 }
 
 @keyframes spin {
@@ -241,8 +276,8 @@
 }
 
 .close-icon {
-  width: 25px; /* Adjust width as needed */
-  height: 25px; /* Adjust height as needed */
+  width: 25px; 
+  height: 25px; 
 }
 
 .btn-purple{

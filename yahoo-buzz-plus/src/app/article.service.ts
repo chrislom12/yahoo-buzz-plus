@@ -9,7 +9,7 @@ import { environment } from '../environments/environment';
 })
 export class ArticleService {
   private baseUrl = environment.baseUrl;
-  private apiUrl = this.baseUrl + '/api/getArticles/'; // Adjust the URL if needed
+  private apiUrl = this.baseUrl + '/api/getArticles/'; 
 
   constructor(private http: HttpClient) {}
 
