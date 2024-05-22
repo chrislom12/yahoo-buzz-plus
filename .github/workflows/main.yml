@@ -1,12 +1,16 @@
-name: Angular Build and Deploy
+name: App Building, Testing and Deployment
 
 on:
   push:
     branches:
-      - '**'  # Trigger on push to any branch
+      - '**'
+  pull_request: 
+    branches:
+      - '**'
+  
 
 jobs:
-  build:
+  test-and-deploy-frontend:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -23,8 +27,10 @@ jobs:
 
       - name: Run tests
         run: npm run test:headless
+        working-directory: yahoo-buzz-plus
 
       - name: Build Angular app to prod
+        if: github.ref == 'refs/heads/main'
         working-directory: yahoo-buzz-plus
         run: npm run build:prod
 
@@ -35,3 +41,27 @@ jobs:
           folder: yahoo-buzz-plus/dist/
           branch: prod  
           token: ${{ secrets.GH_TOKEN }}
+  test-backend:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.8'
+
+    - name: Install python dependencies
+      working-directory: flask-backend
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+      
+    - name: Run tests
+      working-directory: flask-backend
+      run: |
+        pytest tests.py
