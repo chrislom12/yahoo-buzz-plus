@@ -60,4 +60,4 @@ jobs:
     - name: Run tests
       working-directory: flask-backend
       run: |
-        python -m pytest tests
+        pytest tests.py
