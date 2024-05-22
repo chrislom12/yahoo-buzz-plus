@@ -44,6 +44,10 @@ jobs:
         working-directory: yahoo-buzz-plus
         run: npm run test:headless
 
+      - name: Run cypress tests
+        working-directory: yahoo-buzz-plus
+        run: npx cypress run
+
       - name: Build Angular app to prod
         if: github.ref == 'refs/heads/main'
         working-directory: yahoo-buzz-plus
