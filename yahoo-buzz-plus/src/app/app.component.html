@@ -31,6 +31,9 @@
           <li class="nav-item pill">
             <a data-cy="external-link" class="nav-link active" href="{{article.link}}" target="_blank">Link to Original Article</a>
           </li>
+          <li class="custom-button nav-item pill" >
+            <span data-cy="misinfo-btn" class="nav-link active" (click)="detectMisinformation()">{{misinformationStatus}}</span>
+          </li>
         </ul>
       </div>
       <div class="card-text-container">
@@ -77,6 +80,9 @@
           </li>
           <li class="nav-item pill">
             <a data-cy="external-link" class="nav-link active" href="{{article.link}}" target="_blank">Link to Original Article</a>
+          </li>
+          <li class="custom-button nav-item pill" >
+            <span data-cy="misinfo-btn" class="nav-link active" (click)="detectMisinformation()">{{misinformationStatus}}</span>
           </li>
         </ul>
       </div>

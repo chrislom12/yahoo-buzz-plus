@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticleService } from './article.service';
 import { RecommendationService } from './recommendor.service';
+import { MisinformationService } from './misinformation.service';
 
 
 @Component({
@@ -25,7 +26,9 @@ export class AppComponent implements OnInit {
 
   loading=true;
 
-  constructor(private articleService: ArticleService, private recommendationService: RecommendationService) {}
+  misinformationStatus = "Click here to detect misinformation";
+
+  constructor(private articleService: ArticleService, private recommendationService: RecommendationService, private misinformationService: MisinformationService) {}
 
   ngOnInit(): void {
     this.articleService.getArticles().subscribe(
@@ -52,6 +55,7 @@ export class AppComponent implements OnInit {
     this.checkSend()
     this.articleIndex++;
     this.articleProgress++;
+    this.misinformationStatus = "Click here to detect misinformation";
     this.article = this.allArticles[this.articleIndex];
   }
 
@@ -63,7 +67,7 @@ export class AppComponent implements OnInit {
     this.checkSend();
     this.articleIndex++;
     this.articleProgress++;
-
+    this.misinformationStatus = "Click here to detect misinformation";
     this.article = this.allArticles[this.articleIndex];
   }
 
@@ -102,6 +106,28 @@ export class AppComponent implements OnInit {
 
   closeView(){
     this.view = 2;
+    this.misinformationStatus = "Click here to detect misinformation";
+  }
+
+  receiveMisinformation(data:any){
+    this.misinformationStatus = "The article might be: " + data.prediction;
+  }
+
+  detectMisinformation(){
+
+    const currContent = {
+      "text": this.article.title + this.article.text
+    };
+
+    this.misinformationService.detectMisinformation(currContent).subscribe(
+      (results) => {
+        this.receiveMisinformation(results);
+      },
+      (error) => {
+        console.error('Error fetching misinformation detection result:', error);
+      }
+    );
+
   }
 
 }

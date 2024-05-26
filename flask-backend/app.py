@@ -7,6 +7,7 @@ import os
 
 import recommendor
 from shared import cosine_similarities, ds  # Import from shared.py
+import misinformation
 
 
 load_dotenv()
@@ -38,6 +39,22 @@ def getRecommendations():
     feedback = request.json
     results = recommendor.runRecommendations(feedback)
     return jsonify(json.loads(results))
+
+@app.route('/api/detectMisinformation/', methods=['POST'])
+def detectMisinformation():
+    if not request.is_json:
+        return jsonify({"error": "Invalid input, JSON expected"}), 400
+
+    data = request.get_json()
+    text = data.get('text')
+
+    if not text:
+        return jsonify({"error": "No text provided"}), 400
+
+    result = misinformation.predict_news_title(text)
+
+    return jsonify({"prediction": result})
+
 
 # main driver function
 if __name__ == '__main__':

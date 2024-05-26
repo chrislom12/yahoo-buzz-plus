@@ -1,28 +1,31 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
+import { HttpClientModule } from '@angular/common/http'; 
 import { AppComponent } from './app.component';
 import { ArticleService } from './article.service';
 import { RecommendationService } from './recommendor.service';
-import { of } from 'rxjs';
+import { MisinformationService } from './misinformation.service';
+import { of, throwError } from 'rxjs';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
   let component: AppComponent;
   let articleService: ArticleService;
   let recommendationService: RecommendationService;
+  let misinformationService: MisinformationService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, HttpClientModule], // Add HttpClientModule to imports
+      imports: [RouterTestingModule, HttpClientModule], 
       declarations: [AppComponent],
-      providers: [ArticleService, RecommendationService],
+      providers: [ArticleService, RecommendationService, MisinformationService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
     articleService = TestBed.inject(ArticleService);
     recommendationService = TestBed.inject(RecommendationService);
+    misinformationService = TestBed.inject(MisinformationService);
   });
 
   it('should create the app', () => {
@@ -61,6 +64,8 @@ describe('AppComponent', () => {
     expect(component.articleIndex).toBe(1);
     expect(component.articleProgress).toBe(2);
     expect(component.article).toEqual(article2);
+    expect(component.misinformationStatus).toBe("Click here to detect misinformation")
+
   });
 
   it('should dislike an article', () => {
@@ -74,6 +79,8 @@ describe('AppComponent', () => {
     expect(component.articleIndex).toBe(1);
     expect(component.articleProgress).toBe(2);
     expect(component.article).toEqual(article2);
+    expect(component.misinformationStatus).toBe("Click here to detect misinformation")
+
   });
 
   it('should send feedback when article progress is greater than 9', () => {
@@ -154,7 +161,7 @@ describe('AppComponent', () => {
   it('should navigate to the selected recommendation when read more button is clicked', () => {
     const recommendation = { id: 1, title: 'Recommendation 1' };
     component.recommendations = [recommendation];
-    spyOn(console, 'log'); // Mock console.log
+    spyOn(console, 'log'); 
     component.readMore(0);
     expect(component.article).toEqual(recommendation);
     expect(component.view).toBe(3);
@@ -243,7 +250,7 @@ describe('AppComponent', () => {
   it('should navigate to the selected recommendation when read more button is clicked', () => {
     const recommendation = { id: 1, title: 'Recommendation 1' };
     component.recommendations = [recommendation];
-    spyOn(console, 'log'); // Mock console.log
+    spyOn(console, 'log'); 
     component.readMore(0);
     expect(component.article).toEqual(recommendation);
     expect(component.view).toBe(3);
@@ -275,7 +282,7 @@ describe('AppComponent', () => {
   it('should change view to selected recommendation when read more button is clicked', () => {
     const recommendation = { id: 1, title: 'Recommendation 1' };
     component.recommendations = [recommendation];
-    spyOn(console, 'log'); // Mock console.log
+    spyOn(console, 'log');
     component.readMore(0);
     expect(component.article).toEqual(recommendation);
     expect(component.view).toBe(3);
@@ -286,5 +293,33 @@ describe('AppComponent', () => {
     component.view = 3;
     component.closeView();
     expect(component.view).toBe(2);
+    expect(component.misinformationStatus).toBe("Click here to detect misinformation")
+  });
+
+  it('should update misinformation status when receiving misinformation prediction', () => {
+    const mockData = { prediction: 'FAKE' };
+    component.receiveMisinformation(mockData);
+    expect(component.misinformationStatus).toBe('The article might be: FAKE');
+  });
+  
+  it('should call detectMisinformation service method and update misinformation status on success', () => {
+    const mockArticle = { id: 1, title: 'Article 1', text: 'Lorem ipsum dolor sit amet' };
+    const mockContent = { text: 'Article 1Lorem ipsum dolor sit amet' };
+    spyOn(misinformationService, 'detectMisinformation').and.returnValue(of({ prediction: 'FAKE' }));
+    spyOn(component, 'receiveMisinformation');
+    component.article = mockArticle;
+    component.detectMisinformation();
+    expect(misinformationService.detectMisinformation).toHaveBeenCalledWith(mockContent);
+    expect(component.receiveMisinformation).toHaveBeenCalledWith({ prediction: 'FAKE' });
+  });
+  
+  it('should log error when detectMisinformation service method fails', () => {
+    const mockArticle = { id: 1, title: 'Article 1', text: 'Lorem ipsum dolor sit amet' };
+    const mockContent = { text: 'Article 1Lorem ipsum dolor sit amet' };
+    spyOn(misinformationService, 'detectMisinformation').and.returnValue(throwError('Error'));
+    spyOn(console, 'error');
+    component.article = mockArticle;
+    component.detectMisinformation();
+    expect(console.error).toHaveBeenCalledWith('Error fetching misinformation detection result:', 'Error');
   });
 });
