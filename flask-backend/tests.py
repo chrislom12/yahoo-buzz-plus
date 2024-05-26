@@ -6,6 +6,7 @@ import json
 import json
 from recommendor import aggregateRecommendation, recommendation, runRecommendations
 from shared import ds, cosine_similarities
+import misinformation
 
 # ======================
 # UNIT TESTS
@@ -97,6 +98,23 @@ def test_run_recommendations(mocker, mock_ds, mock_cosine_similarities):
     assert json.loads(result) == [{'title': 'Test'}]
     mock_aggregate.assert_called_once()
 
+def test_predict_news_title_valid():
+    title = "The stock market is experiencing unprecedented growth."
+    prediction = misinformation.predict_news_title(title)
+    assert prediction in ['FAKE', 'REAL']
+
+def test_detect_misinformation(client, mocker):
+    test_article = "The stock market is experiencing unprecedented growth."
+
+    mock_predict = mocker.patch('misinformation.predict_news_title')
+    mock_predict.return_value = 'REAL'
+
+    response = client.post('/api/detectMisinformation/', json={'text': test_article})
+
+    assert response.status_code == 200
+    assert response.content_type == 'application/json'
+    assert response.json == 'REAL'
+
 
 # ======================
 # INTEGRATION TESTS
@@ -117,3 +135,14 @@ def test_post_recommendations(client):
     response = client.post('/api/recommend/', json=feedback)
     assert response.status_code == 200
     assert response.content_type == 'application/json'
+
+def test_detect_misinformation(client):
+    test_article = "The stock market is experiencing unprecedented growth."
+
+    response = client.post('/api/detectMisinformation/', json={'text': test_article})
+
+    assert response.status_code == 200
+    assert response.content_type == 'application/json'
+    assert response.json['prediction'] in ['REAL', 'FAKE']
+
+

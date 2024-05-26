@@ -17,7 +17,7 @@ describe('RecommendationService', () => {
   });
 
   afterEach(() => {
-    httpMock.verify(); // Verify that no requests are outstanding
+    httpMock.verify(); 
   });
 
   it('should be created', () => {
@@ -48,7 +48,6 @@ describe('RecommendationService', () => {
         expect(err.status).toBe(0);
         expect(err.statusText).toBe('Unknown Error');
         expect(err.url).toBe(service.apiUrl);
-        // Add more specific expectations as needed
       }
     });
   
