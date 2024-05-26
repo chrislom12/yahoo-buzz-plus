@@ -55,6 +55,7 @@ def detectMisinformation():
 
     return jsonify({"prediction": result})
 
+
 # main driver function
 if __name__ == '__main__':
     dev = os.getenv('DEVELOPMENT')
